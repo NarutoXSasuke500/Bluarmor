@@ -13,15 +13,18 @@ const WhyBluarmor = () => {
     <section className="section-spacing bg-[#0a0a0b]">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="mb-16">
-          <span className="text-label text-[#2563eb] mb-4 block">Our Principles</span>
-          <h2 className="heading-section text-[#f5f5f7]">
-            WHY BLUARMOR
+        <div className="mb-12">
+          <span className="text-label text-[#2563eb] mb-4 block">Our Philosophy</span>
+          <h2 className="heading-section text-[#f5f5f7] mb-4">
+            WHY BLUARMOR?
           </h2>
+          <p className="text-body max-w-2xl">
+            At Bluarmor, we believe that connectivity is infrastructure, not just an accessory. The best technology is the kind that disappears, letting you focus entirely on the ride.
+          </p>
         </div>
 
         {/* Pillars */}
-        <div className="grid-3-col">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {whyBluarmor.map((pillar) => {
             const IconComponent = iconMap[pillar.id] || Lightbulb;
             return (
@@ -35,7 +38,7 @@ const WhyBluarmor = () => {
                 <h3 className="heading-subsection text-[#f5f5f7] mb-4">
                   {pillar.title}
                 </h3>
-                <p className="text-body">
+                <p className="text-body text-sm">
                   {pillar.description}
                 </p>
               </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { finalCTA } from '../../data/mock';
 
@@ -10,10 +11,10 @@ const FinalCTA = () => {
           <h2 className="heading-section text-[#f5f5f7] mb-8">
             {finalCTA.headline}
           </h2>
-          <a href="#products" className="btn-primary inline-flex">
+          <Link to="/products" className="btn-primary inline-flex">
             {finalCTA.cta}
             <ChevronRight className="w-5 h-5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

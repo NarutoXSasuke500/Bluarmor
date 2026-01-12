@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { heroContent } from '../../data/mock';
 
@@ -19,26 +20,26 @@ const HeroSection = () => {
       <div className="container-wide relative z-10 pt-20">
         <div className="max-w-4xl">
           {/* Main Headline */}
-          <h1 className="heading-hero text-[#f5f5f7] mb-4 animate-fade-in-up">
+          <h1 className="heading-hero text-[#f5f5f7] mb-2 animate-fade-in-up">
             {heroContent.headline}
           </h1>
           
           {/* Subheadline */}
-          <p className="heading-subsection text-[#a1a1aa] mb-8 animate-fade-in-up animate-delay-1">
+          <p className="heading-hero text-[#a1a1aa] mb-8 animate-fade-in-up animate-delay-1">
             {heroContent.subheadline}
           </p>
           
           {/* Description */}
-          <p className="text-body max-w-2xl mb-12 animate-fade-in-up animate-delay-2">
+          <p className="text-body text-lg max-w-2xl mb-12 animate-fade-in-up animate-delay-2">
             {heroContent.description}
           </p>
           
           {/* CTA */}
           <div className="animate-fade-in-up animate-delay-3">
-            <a href="#products" className="btn-primary">
+            <Link to="/products" className="btn-primary">
               {heroContent.cta}
               <ChevronRight className="w-5 h-5" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

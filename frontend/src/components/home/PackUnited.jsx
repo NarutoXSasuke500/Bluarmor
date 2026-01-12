@@ -1,11 +1,12 @@
 import React from 'react';
-import { Users, Handshake, UserPlus, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Users, Handshake, Smartphone, ChevronRight } from 'lucide-react';
 import { packUnitedContent } from '../../data/mock';
 
 const iconMap = {
   'democratic-mesh': Users,
   'universal-handshake': Handshake,
-  'digital-pillion': UserPlus,
+  'digital-pillion': Smartphone,
 };
 
 const PackUnited = () => {
@@ -13,14 +14,17 @@ const PackUnited = () => {
     <section className="section-spacing bg-[#141416]">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="mb-16 max-w-3xl">
+        <div className="mb-8 max-w-3xl">
           <h2 className="heading-section text-[#f5f5f7] mb-6">
             {packUnitedContent.headline}
           </h2>
+          <p className="text-body text-lg">
+            {packUnitedContent.intro}
+          </p>
         </div>
 
         {/* Features */}
-        <div className="grid-3-col mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {packUnitedContent.sections.map((section) => {
             const IconComponent = iconMap[section.id] || Users;
             return (
@@ -41,10 +45,10 @@ const PackUnited = () => {
 
         {/* CTA */}
         <div>
-          <button className="btn-secondary">
+          <Link to="/products" className="btn-secondary">
             {packUnitedContent.cta}
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>
