@@ -264,13 +264,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "GET /api/products - List all products"
-    - "POST /api/contact - Submit contact inquiry"
-    - "POST /api/support/ticket - Create support ticket"
-    - "POST /api/newsletter/subscribe - Newsletter subscription"
-    - "GET /api/support/faq - Get FAQ items"
+    - "Homepage with all sections"
+    - "About page with timeline"
+    - "Support page with FAQ and ticket form"
+    - "Newsletter subscription in footer"
+    - "Product selector with backend integration"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
