@@ -10,30 +10,26 @@ const ProductSimulator = () => {
   );
   const [selectedProduct, setSelectedProduct] = useState(featuredProducts[2]);
 
-  if (loading) {
-    return (
-      <section id="products" className="section-spacing bg-[#141416]">
-        <div className="container-wide flex items-center justify-center py-20">
-          <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin" />
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section id="products" className="section-spacing bg-[#141416]">
       <div className="container-wide">
         {/* Section Header */}
-        <div className="mb-16">
-          <span className="text-label text-[#2563eb] mb-4 block">Select Your Loadout</span>
-          <h2 className="heading-section text-[#f5f5f7]">
-            PRODUCT SELECTION
-          </h2>
+        <div className="mb-16 flex items-end justify-between">
+          <div>
+            <span className="text-label text-[#2563eb] mb-4 block">Select Your Loadout</span>
+            <h2 className="heading-section text-[#f5f5f7]">
+              FEATURED PRODUCTS
+            </h2>
+          </div>
+          <Link to="/products" className="text-sm text-[#2563eb] hover:text-[#3b82f6] flex items-center gap-1">
+            View All 13 Products
+            <ChevronRight className="w-4 h-4" />
+          </Link>
         </div>
 
-        {/* Product Grid - 6 products in 2 rows */}
+        {/* Product Grid - 6 featured products */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
+          {featuredProducts.map((product) => (
             <button
               key={product.id}
               onClick={() => setSelectedProduct(product)}
