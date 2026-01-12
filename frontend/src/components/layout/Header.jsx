@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight, ShoppingCart } from 'lucide-react';
 import { navigationLinks } from '../../data/mock';
 
 const Header = () => {
@@ -45,15 +45,22 @@ const Header = () => {
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-sm font-medium tracking-wider uppercase text-[#a1a1aa] hover:text-[#f5f5f7] transition-colors duration-150"
+                className={`text-sm font-medium tracking-wider uppercase transition-colors duration-150 ${
+                  location.pathname === link.href
+                    ? 'text-[#f5f5f7]'
+                    : 'text-[#a1a1aa] hover:text-[#f5f5f7]'
+                }`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Right Side - Cart & CTA */}
+          <div className="hidden md:flex items-center gap-4">
+            <button className="p-2 text-[#a1a1aa] hover:text-[#f5f5f7] transition-colors">
+              <ShoppingCart className="w-5 h-5" />
+            </button>
             <Link
               to="/products"
               className="btn-primary text-sm px-6 py-3"
