@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import { Check, ChevronRight, Loader2, Filter } from 'lucide-react';
-import { products as allProductsList } from '../data/productDetails';
+import { Check, ChevronRight, Grid3X3, Users, Headphones, Route, Package } from 'lucide-react';
+import { products, productDetails } from '../data/productDetails';
+import { lifestyleCategories, accessories } from '../data/mock';
 import '../styles/bluarmor.css';
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState(allProductsList);
-  const [loading, setLoading] = useState(false);
-  const [filter, setFilter] = useState('all');
-
-  const categories = [
-    { id: 'all', label: 'All Products' },
-    { id: 'headset', label: 'Headsets' },
-    { id: 'intercom', label: 'Intercoms' },
-    { id: 'premium', label: 'Premium' },
-  ];
-
-  const filteredProducts = filter === 'all' 
-    ? products 
-    : products.filter(p => p.category === filter);
+  const [viewMode, setViewMode] = useState('product'); // 'product', 'lifestyle', 'accessories'
+  const [selectedLifestyle, setSelectedLifestyle] = useState(null);
 
   const getCategoryLabel = (category) => {
     switch(category) {
@@ -31,6 +20,28 @@ const ProductsPage = () => {
     }
   };
 
+  const getLifestyleIcon = (id) => {
+    switch(id) {
+      case 'highway-touring': return Route;
+      case 'weekend-group': return Users;
+      case 'one-on-one': return Users;
+      case 'bluetooth-headset': return Headphones;
+      default: return Grid3X3;
+    }
+  };
+
+  const getFilteredProducts = () => {
+    if (viewMode === 'lifestyle' && selectedLifestyle) {
+      const category = lifestyleCategories.find(c => c.id === selectedLifestyle);
+      if (category) {
+        return products.filter(p => category.products.includes(p.id));
+      }
+    }
+    return products;
+  };
+
+  const filteredProducts = getFilteredProducts();
+
   return (
     <div className="bluarmor-app">
       <Header />
@@ -39,50 +50,147 @@ const ProductsPage = () => {
         <section className="min-h-[40vh] flex items-center justify-center bg-[#0a0a0b] pt-20">
           <div className="container-wide">
             <div className="max-w-4xl">
-              <span className="text-label text-[#2563eb] mb-4 block">2026 Armoury</span>
+              <span className="text-label text-[#2563eb] mb-4 block">Explore The Armoury</span>
               <h1 className="heading-hero text-[#f5f5f7] mb-4">
-                CHOOSE YOUR GEAR
+                SELECT YOUR COMMS TOOLKIT
               </h1>
               <p className="text-body max-w-2xl">
-                From daily commuters to expedition tourers, find the perfect communication system for your riding style.
+                Solo Expeditions or Squad Adventures — We keep you connected.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Filter Bar */}
+        {/* View Mode Tabs */}
         <section className="bg-[#141416] border-y border-[#27272a] sticky top-20 z-40">
           <div className="container-wide py-4">
-            <div className="flex items-center gap-6 overflow-x-auto">
-              <div className="flex items-center gap-2 text-[#71717a]">
-                <Filter className="w-4 h-4" />
-                <span className="text-sm">Filter:</span>
-              </div>
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setFilter(cat.id)}
-                  className={`px-4 py-2 text-sm font-medium tracking-wide uppercase whitespace-nowrap transition-colors ${
-                    filter === cat.id
-                      ? 'text-[#f5f5f7] bg-[#2563eb]'
-                      : 'text-[#a1a1aa] hover:text-[#f5f5f7]'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => { setViewMode('product'); setSelectedLifestyle(null); }}
+                className={`px-6 py-3 text-sm font-medium tracking-wide uppercase transition-all ${
+                  viewMode === 'product'
+                    ? 'text-[#f5f5f7] bg-[#2563eb]'
+                    : 'text-[#a1a1aa] hover:text-[#f5f5f7] bg-[#1a1a1e]'
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <Grid3X3 className="w-4 h-4" />
+                  Choose by Product
+                </span>
+              </button>
+              <button
+                onClick={() => setViewMode('lifestyle')}
+                className={`px-6 py-3 text-sm font-medium tracking-wide uppercase transition-all ${
+                  viewMode === 'lifestyle'
+                    ? 'text-[#f5f5f7] bg-[#2563eb]'
+                    : 'text-[#a1a1aa] hover:text-[#f5f5f7] bg-[#1a1a1e]'
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <Users className="w-4 h-4" />
+                  Choose by Lifestyle
+                </span>
+              </button>
+              <button
+                onClick={() => setViewMode('accessories')}
+                className={`px-6 py-3 text-sm font-medium tracking-wide uppercase transition-all ${
+                  viewMode === 'accessories'
+                    ? 'text-[#f5f5f7] bg-[#2563eb]'
+                    : 'text-[#a1a1aa] hover:text-[#f5f5f7] bg-[#1a1a1e]'
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <Package className="w-4 h-4" />
+                  Accessories
+                </span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* Products Grid */}
-        <section className="section-spacing bg-[#0a0a0b]">
-          <div className="container-wide">
-            {loading ? (
-              <div className="flex items-center justify-center py-20">
-                <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin" />
+        {/* Lifestyle Categories */}
+        {viewMode === 'lifestyle' && (
+          <section className="bg-[#0a0a0b] border-b border-[#27272a]">
+            <div className="container-wide py-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {lifestyleCategories.map((category) => {
+                  const IconComponent = getLifestyleIcon(category.id);
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedLifestyle(selectedLifestyle === category.id ? null : category.id)}
+                      className={`p-6 text-left border transition-all ${
+                        selectedLifestyle === category.id
+                          ? 'bg-[#1a1a1e] border-[#2563eb]'
+                          : 'bg-[#141416] border-[#27272a] hover:border-[#3f3f46]'
+                      }`}
+                    >
+                      <IconComponent className={`w-8 h-8 mb-4 ${
+                        selectedLifestyle === category.id ? 'text-[#2563eb]' : 'text-[#71717a]'
+                      }`} />
+                      <h3 className="text-lg font-semibold text-[#f5f5f7] mb-2">
+                        {category.title}
+                      </h3>
+                      <p className="text-sm text-[#71717a]">
+                        {category.description}
+                      </p>
+                      <p className="text-xs text-[#2563eb] mt-3">
+                        {category.products.length} products
+                      </p>
+                    </button>
+                  );
+                })}
               </div>
-            ) : (
+            </div>
+          </section>
+        )}
+
+        {/* Accessories Grid */}
+        {viewMode === 'accessories' && (
+          <section className="section-spacing bg-[#0a0a0b]">
+            <div className="container-wide">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {accessories.map((accessory) => (
+                  <div
+                    key={accessory.id}
+                    className="bg-[#141416] border border-[#27272a] hover:border-[#3f3f46] transition-all"
+                  >
+                    {/* Accessory Image Placeholder */}
+                    <div className="aspect-square bg-[#1a1a1e] flex items-center justify-center border-b border-[#27272a]">
+                      <Package className="w-16 h-16 text-[#27272a]" />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold text-[#f5f5f7] mb-2">
+                        {accessory.name}
+                      </h3>
+                      <p className="text-sm text-[#71717a] mb-4">
+                        {accessory.description}
+                      </p>
+                      <p className="text-xl font-bold text-[#f5f5f7] mb-4">
+                        {accessory.price}
+                      </p>
+                      <button className="btn-secondary w-full text-sm">
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Products Grid */}
+        {viewMode !== 'accessories' && (
+          <section className="section-spacing bg-[#0a0a0b]">
+            <div className="container-wide">
+              {selectedLifestyle && (
+                <div className="mb-8">
+                  <p className="text-sm text-[#71717a]">
+                    Showing {filteredProducts.length} products for "{lifestyleCategories.find(c => c.id === selectedLifestyle)?.title}"
+                  </p>
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProducts.map((product) => (
                   <Link
@@ -138,16 +246,16 @@ const ProductsPage = () => {
                   </Link>
                 ))}
               </div>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         {/* Compare Section */}
         <section className="bg-[#141416] border-t border-[#27272a]">
           <div className="container-wide py-16">
             <div className="text-center max-w-2xl mx-auto">
               <h2 className="heading-subsection text-[#f5f5f7] mb-4">
-                NOT SURE WHICH ONE?
+                CONQUER THE UNCHARTED WITHOUT LOSING TOUCH
               </h2>
               <p className="text-body mb-8">
                 Our products are designed for different riding styles. Solo commuters, pillion duos, weekend groups, or expedition tourers — there's a BluArmor for everyone.

@@ -1,15 +1,17 @@
-// Bluarmor Mock Data
+// Bluarmor Mock Data - Updated to match Canva Layout
 
 export const navigationLinks = [
   { label: 'Products', href: '/products' },
-  { label: 'About', href: '/about' },
   { label: 'Support', href: '/support' },
+  { label: 'Warranty', href: '/warranty' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Media', href: '/media' },
 ];
 
 export const heroContent = {
-  headline: 'BUILT TO LAST',
-  subheadline: 'Designed to evolve',
-  description: 'Seamless operation. Engineered to disappear. Adaptive mesh technology that gets smarter with every mile, so you can just ride.',
+  headline: 'BUILT TO LAST.',
+  subheadline: 'Designed to Evolve.',
+  description: 'Seamless Operation. Engineered to Disappear. Adaptive mesh technology that gets smarter with every mile, so you can just ride.',
   cta: 'Explore the 2026 Armoury',
 };
 
@@ -19,77 +21,88 @@ export const commandCentreFeatures = [
   {
     id: 'eridegrid',
     title: 'eRideGrid',
-    description: 'Mesh-over-cloud technology that creates a self-healing network between riders. When one rider loses signal, others bridge the gap.',
+    description: 'Innovative mesh-over-cloud technology that dramatically extends your device range beyond line-of-sight.',
   },
   {
     id: 'portweave',
     title: 'PortWeave',
-    description: 'Connect up to 6 devices simultaneously. Phone, GPS, music, intercom — all unified under one intelligent system.',
+    description: 'Simultaneously connect up to 6 devices to a single unit. The ultimate hub for phone, GPS, and mesh.',
   },
   {
     id: 'audiorange',
     title: 'Audio Range',
-    description: 'High-definition audio engineered for wind noise cancellation. Crystal clear communication at any speed.',
+    description: 'Experience signature high-definition audio featuring two distinct levels of active Noise Reduction.',
   },
   {
     id: 'heyblu',
     title: 'Hey Blu',
-    description: 'Hands-free voice commands that understand context. Navigate, call, and control without lifting a finger.',
+    description: 'Intuitive hands-free voice commands. Just say "Hey Blu" to control music, calls, and volume instantly.',
   },
   {
     id: 'latchon',
     title: 'Latch On Protocol',
-    description: 'Bridges base units across different helmet systems. Universal compatibility, zero compromise.',
+    description: 'Seamlessly bridges base units to premium hubs, keeping the whole pack connected in one mesh.',
   },
   {
     id: 'otaupdate',
     title: 'OTA Update',
-    description: 'Wireless firmware updates that improve your system over time. Your gear evolves with the technology.',
+    description: 'Wireless firmware updates delivered via the app. Your hardware evolves and gets smarter with every mile.',
   },
 ];
 
-export const products = [
+// Product categories by lifestyle
+export const lifestyleCategories = [
   {
-    id: 'hs1',
-    name: 'BluArmor HS1',
-    tagline: 'Solo Commuters & Daily Riders',
-    price: '₹2,999',
-    features: ['Dhwani Audio', 'Bluetooth 5.3', '20H Battery', 'Voice Assistant Ready'],
+    id: 'highway-touring',
+    title: 'Highway and Touring',
+    description: 'For long-distance riders and touring enthusiasts',
+    products: ['c60pro', 'c60plus', 'c60', 'c50pro', 'c50plus', 'c50'],
   },
   {
-    id: 'c20',
-    name: 'BluArmor C20',
-    tagline: 'Urban Explorers & Entry-Level Groups',
-    price: '₹9,999',
-    features: ['RideGrid Lite Mesh', 'Pulse by BLU Audio', 'Music Sharing', '16+ Hour Battery'],
+    id: 'weekend-group',
+    title: 'Weekend Rides & Group Activities',
+    description: 'Perfect for weekend warriors and group riders',
+    products: ['c40', 'c20-mesh', 'c20', 'c30'],
   },
   {
-    id: 'c30',
-    name: 'BluArmor C30',
-    tagline: 'Endurance Riders & Pillion Duos',
-    price: '₹10,999',
-    features: ['Hybrid Mesh + Bluetooth', 'Charge-on-the-Go', '5-Button Interface', 'Universal Pairing'],
+    id: 'one-on-one',
+    title: 'One-on-One Connectivity',
+    description: 'Ideal for rider-pillion communication',
+    products: ['c10'],
   },
   {
-    id: 'c50',
-    name: 'BluArmor C50',
-    tagline: 'Group Riders & Mesh Network Users',
-    price: '₹15,999',
-    features: ['RideGrid 2.0 Mesh', '20 Rider Connectivity', 'Tuned by BLU Audio', 'IP67 Waterproof'],
+    id: 'bluetooth-headset',
+    title: 'Bluetooth Headset',
+    description: 'Solo riders who need quality audio',
+    products: ['hs2', 'hs1'],
+  },
+];
+
+// Accessories
+export const accessories = [
+  {
+    id: 'magdock',
+    name: 'MagDock',
+    description: 'Magnetic mounting system for quick attach/detach',
+    price: '₹1,499',
   },
   {
-    id: 'c50plus',
-    name: 'BluArmor C50Plus',
-    tagline: 'Serious Tourers & Performance Riders',
-    price: '₹18,999',
-    features: ['RideGrid 2.0', 'Wireless T-Stick Remote', 'ClickDock Mount', '16+ Hour Battery'],
+    id: 'clickdock',
+    name: 'ClickDock',
+    description: 'Secure mechanical mounting system',
+    price: '₹999',
   },
   {
-    id: 'c50pro',
-    name: 'BluArmor C50Pro',
-    tagline: 'Ride Captains & Tech Enthusiasts',
-    price: '₹24,999',
-    features: ['RideAura Safety Lighting', 'Wireless T-Stick', 'MagDock Mount', 'Crash Detection SOS'],
+    id: 't-stick',
+    name: 'T-Stick',
+    description: 'Wireless handlebar remote control',
+    price: '₹2,499',
+  },
+  {
+    id: 'extra-helmet-kit',
+    name: 'Extra Helmet Kit',
+    description: 'Speaker and mic kit for second helmet',
+    price: '₹1,999',
   },
 ];
 
@@ -105,7 +118,7 @@ export const riderStories = [
     id: 2,
     name: 'Priya Sharma',
     location: 'Daily Commuter',
-    quote: 'It just works. Every day. That\'s all I needed.',
+    quote: "It just works. Every day. That's all I needed.",
     rides: '8,500+ km',
   },
   {
@@ -119,21 +132,22 @@ export const riderStories = [
 
 export const packUnitedContent = {
   headline: 'THE PACK UNITED. NO MATTER WHAT THEY RIDE.',
+  intro: 'The era of "Can you hear me?" is over. Whether you are leading on a C50 or sweeping on a C20, the Grid keeps you connected.',
   sections: [
     {
       id: 'democratic-mesh',
       title: 'The Democratic Mesh',
-      description: 'Every rider is equal on the network. No hierarchy. No single point of failure. True distributed communication.',
+      description: 'C60 + C50 + C40 + C30 + C20 + C10 = One Grid. We built the architecture so you can build the pack.',
     },
     {
       id: 'universal-handshake',
-      title: 'The Universal Handshake',
-      description: 'Connect with any Bluarmor device instantly. One tap. No pairing drama. No compatibility questions.',
+      title: 'The Universal Handshake (Latch On Protocol)',
+      description: "Don't Leave Your Friends Behind. Our Latch On Protocol bridges the gap, allowing Bluarmor units to connect with other Bluarmor devices.",
     },
     {
       id: 'digital-pillion',
       title: 'The Digital Pillion',
-      description: 'Your passenger connects as seamlessly as you do. Same quality. Same features. Same experience.',
+      description: 'Your Phone is the Hub. Hyperconnectivity means your music, your maps, and your calls flow through the One App Command Centre.',
     },
   ],
   cta: 'Build Your Pack',
@@ -143,17 +157,17 @@ export const whyBluarmor = [
   {
     id: 'innovation',
     title: 'INNOVATION',
-    description: 'Engineering solutions that don\'t exist yet. We build the infrastructure others will follow.',
+    description: "Most brands force you to learn their interface; we designed ours to learn your ride. We don't just build gadgets; we build ecosystems designed to evolve. With adaptive mesh technology, we stripped away the pairing rituals and button-mashing, ensuring you stay focused on the only thing that matters: the road.",
   },
   {
     id: 'quality',
     title: 'QUALITY',
-    description: 'Every component tested beyond limits. Every connection verified. Every unit accountable.',
+    description: 'We refuse to compromise on clarity. From our signature high-definition audio to our seamless Latch On Protocol, every interaction is engineered for precision and seamless operation.',
   },
   {
     id: 'ruggedness',
     title: 'RUGGEDNESS',
-    description: 'Built for the road, not the showroom. Dust, rain, heat, cold — we\'ve ridden through it all.',
+    description: 'Our gear is built to last. We design hardware that withstands the elements and the demands of the road, ensuring that your command center remains operational in any condition.',
   },
 ];
 
@@ -178,7 +192,7 @@ export const aboutStory = [
     id: 'habit-insight',
     year: '2018',
     title: 'The Habit Insight',
-    content: 'We observed riders. We rode with them. We understood that connectivity isn\'t about having more features — it\'s about having reliable ones that disappear into the ride.',
+    content: "We observed riders. We rode with them. We understood that connectivity isn't about having more features — it's about having reliable ones that disappear into the ride.",
   },
   {
     id: 'infrastructure-pivot',
@@ -214,7 +228,7 @@ export const aboutStory = [
     id: 'brand-promise',
     year: '2026',
     title: 'The Brand Promise',
-    content: 'We don\'t promise excitement. We promise reliability. We promise that when you need it to work, it will work.',
+    content: "We don't promise excitement. We promise reliability. We promise that when you need it to work, it will work.",
   },
 ];
 
@@ -237,11 +251,17 @@ export const supportHero = {
   subheadline: 'Hardware is hard. The road is harder.',
 };
 
+export const supportContact = {
+  phone: '+91 95387 25827',
+  whatsapp: '+91 96067 18202',
+  hours: 'Monday to Saturday, 10:00 AM to 08:00 PM',
+};
+
 export const supportSections = [
   {
     id: 'product-profile',
     title: 'Product Profile Diagnostics',
-    description: 'Every Bluarmor device has a digital identity. Access your product\'s complete history, performance data, and diagnostic information.',
+    description: "Every Bluarmor device has a digital identity. Access your product's complete history, performance data, and diagnostic information.",
     cta: 'Check Your Device',
   },
   {
@@ -260,21 +280,66 @@ export const supportSections = [
 
 export const supportCTA = 'Access Support Command';
 
-export const faqItems = [
+// FAQ Items organized by category (from Canva)
+export const faqCategories = [
   {
-    question: 'How do I update my device firmware?',
-    answer: 'Open the Bluarmor app, connect your device, and navigate to Settings > Firmware. Updates are automatic when available.',
+    id: 'comms-connectivity',
+    title: 'COMMS & CONNECTIVITY',
+    items: [
+      {
+        question: "I can't get my C50 Pro to join my friend's Mesh group.",
+        answer: 'Ensure all units are running on the same eRidegrid™ Channel. Open the BluArmor App, go to Mesh Settings, and check that everyone is on "Channel 1" (or your designated channel). Also, ensure your antenna is flipped up for the initial handshake.',
+      },
+      {
+        question: 'Can I connect with a rider using a Sena, Cardo, or generic headset?',
+        answer: 'Affirmative. Use RIDELYNK™ (Universal Pairing) mode. 1. Put your C50 Pro in "Universal Pairing Mode" (Hold Button A + B). 2. Put the other brand\'s unit into "Phone Pairing Mode." 3. They will connect via Bluetooth. Note: Range will be limited to standard Bluetooth distance (approx 50-100m).',
+      },
+      {
+        question: 'My music stops when someone talks. Can I hear both?',
+        answer: 'You need to enable Audio Overlay in the app. Go to Audio Settings > Multitasking Volume. This allows your music or GPS to continue playing at a lower volume in the background while the intercom is active.',
+      },
+    ],
   },
   {
-    question: 'What is the warranty period?',
-    answer: 'All Bluarmor devices come with a 2-year comprehensive warranty covering manufacturing defects and component failures.',
+    id: 'audio-sound',
+    title: 'AUDIO & SOUND',
+    items: [
+      {
+        question: 'The volume seems low, even at maximum levels.',
+        answer: '90% of the time, this is a speaker placement issue. The speakers must be perfectly aligned with your ear canal. Check: If your helmet has deep ear pockets, use the provided spacer pads to push the speakers closer to your ears. Even a 5mm gap causes a massive drop in volume and bass.',
+      },
+      {
+        question: 'My group says they hear too much wind noise from my mic.',
+        answer: 'Check your mic positioning. 1. Ensure the microphone is directly in front of your mouth, almost touching your lips. 2. The "Fin" on the microphone sponge should be facing away from your mouth (towards the helmet vent) to deflect incoming air.',
+      },
+    ],
   },
   {
-    question: 'How many devices can connect in a mesh?',
-    answer: 'The eRideGrid mesh network supports unlimited riders. Each node strengthens the network.',
+    id: 'hardware-mounting',
+    title: 'HARDWARE & MOUNTING',
+    items: [
+      {
+        question: 'I rode through a heavy monsoon. Is my unit safe?',
+        answer: 'Your C50 Pro is IP67 Rated, meaning it is built to survive Indian monsoons. Protocol: Do not charge the unit immediately if it is wet. Wipe the unit dry and ensure the USB port is moisture-free before plugging in power.',
+      },
+      {
+        question: "My MagDock isn't locking in securely.",
+        answer: 'Check the Pogo Pins (the gold contacts) on the dock and the unit. If there is dust or mud on them, the magnetic connection might be weak. Wipe them clean with a soft cloth or an alcohol swab.',
+      },
+    ],
   },
   {
-    question: 'Is the system waterproof?',
-    answer: 'All devices are rated IP67 — fully protected against dust and water immersion up to 1 meter for 30 minutes.',
+    id: 'app-updates',
+    title: 'APP & UPDATES',
+    items: [
+      {
+        question: "The App isn't finding my device.",
+        answer: '1. Ensure your phone\'s Bluetooth and GPS/Location Services are turned ON (Android requires Location for BLE connections). 2. Restart the BluArmor unit. 3. If it persists, "Forget" the device in your phone\'s Bluetooth settings and repair from scratch.',
+      },
+      {
+        question: 'How do I know if a Firmware update is available?',
+        answer: 'The BluArmor App will display a Red Notification Dot on the settings icon if a new mission-critical update is available. We recommend checking this before every major ride.',
+      },
+    ],
   },
 ];
