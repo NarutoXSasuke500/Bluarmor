@@ -3,33 +3,13 @@ import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Check, ChevronRight, Loader2, Filter } from 'lucide-react';
-import { getProducts } from '../services/api';
-import { products as mockProducts } from '../data/mock';
+import { products as allProductsList } from '../data/productDetails';
 import '../styles/bluarmor.css';
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(allProductsList);
+  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState('all');
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts();
-        if (data && data.length > 0) {
-          setProducts(data);
-        } else {
-          setProducts(mockProducts);
-        }
-      } catch (error) {
-        console.log('Using mock products');
-        setProducts(mockProducts);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
-  }, []);
 
   const categories = [
     { id: 'all', label: 'All Products' },
@@ -38,15 +18,18 @@ const ProductsPage = () => {
     { id: 'premium', label: 'Premium' },
   ];
 
-  const getCategory = (product) => {
-    if (product.id === 'hs1') return 'headset';
-    if (product.price.includes('15,999') || product.price.includes('18,999') || product.price.includes('24,999')) return 'premium';
-    return 'intercom';
-  };
-
   const filteredProducts = filter === 'all' 
     ? products 
-    : products.filter(p => getCategory(p) === filter);
+    : products.filter(p => p.category === filter);
+
+  const getCategoryLabel = (category) => {
+    switch(category) {
+      case 'headset': return 'Helmet Headset';
+      case 'intercom': return 'Mesh Intercom';
+      case 'premium': return 'Premium Intercom';
+      default: return 'Intercom';
+    }
+  };
 
   return (
     <div className="bluarmor-app">
