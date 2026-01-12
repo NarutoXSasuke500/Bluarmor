@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { subscribeNewsletter } from '../../services/api';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [subscribeStatus, setSubscribeStatus] = useState(null);
+  const [subscribing, setSubscribing] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setSubscribing(true);
+    setSubscribeStatus(null);
+
+    try {
+      await subscribeNewsletter(email);
+      setSubscribeStatus('success');
+      setEmail('');
+      setTimeout(() => setSubscribeStatus(null), 5000);
+    } catch (error) {
+      if (error.response?.status === 400) {
+        setSubscribeStatus('already');
+      } else {
+        setSubscribeStatus('error');
+      }
+      setTimeout(() => setSubscribeStatus(null), 5000);
+    } finally {
+      setSubscribing(false);
+    }
+  };
 
   const footerLinks = {
     product: [
-      { label: 'BLU3 E', href: '#' },
-      { label: 'BLU5 Pro', href: '#' },
-      { label: 'BLU7 Ultra', href: '#' },
+      { label: 'BLU3 E', href: '#products' },
+      { label: 'BLU5 Pro', href: '#products' },
+      { label: 'BLU7 Ultra', href: '#products' },
       { label: 'Accessories', href: '#' },
     ],
     company: [
@@ -34,6 +62,51 @@ const Footer = () => {
   return (
     <footer className="bg-[#0a0a0b] border-t border-[#27272a]">
       <div className="container-wide">
+        {/* Newsletter Section */}
+        <div className="py-12 border-b border-[#27272a]">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h4 className="text-lg font-medium text-[#f5f5f7] mb-1">Stay Connected</h4>
+              <p className="text-sm text-[#71717a]">Get updates on new products and features.</p>
+            </div>
+            <form onSubmit={handleSubscribe} className="flex gap-3 w-full md:w-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="flex-1 md:w-64 px-4 py-3 bg-[#141416] border border-[#27272a] text-[#f5f5f7] text-sm focus:border-[#2563eb] focus:outline-none"
+                required
+              />
+              <button
+                type="submit"
+                disabled={subscribing}
+                className="btn-primary text-sm px-6"
+              >
+                {subscribing ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  'Subscribe'
+                )}
+              </button>
+            </form>
+          </div>
+          {subscribeStatus && (
+            <div className={`mt-4 flex items-center gap-2 text-sm ${
+              subscribeStatus === 'success' ? 'text-green-500' : 
+              subscribeStatus === 'already' ? 'text-yellow-500' : 'text-red-500'
+            }`}>
+              {subscribeStatus === 'success' ? (
+                <><CheckCircle className="w-4 h-4" /> Successfully subscribed!</>
+              ) : subscribeStatus === 'already' ? (
+                <><AlertCircle className="w-4 h-4" /> Email already subscribed.</>
+              ) : (
+                <><AlertCircle className="w-4 h-4" /> Failed to subscribe. Please try again.</>
+              )}
+            </div>
+          )}
+        </div>
+
         {/* Main Footer */}
         <div className="py-16 grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Column */}
