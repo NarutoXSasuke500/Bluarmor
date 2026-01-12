@@ -13,7 +13,7 @@ export const heroContent = {
   cta: 'Explore the 2026 Armoury',
 };
 
-export const manifestoText = 'CONNECTIVITY ISN'T A FEATURE. IT IS INFRASTRUCTURE.';
+export const manifestoText = "CONNECTIVITY ISN'T A FEATURE. IT IS INFRASTRUCTURE.";
 
 export const commandCentreFeatures = [
   {
