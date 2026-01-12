@@ -1,7 +1,7 @@
 // Bluarmor Mock Data
 
 export const navigationLinks = [
-  { label: 'Products', href: '#products' },
+  { label: 'Products', href: '/products' },
   { label: 'About', href: '/about' },
   { label: 'Support', href: '/support' },
 ];
