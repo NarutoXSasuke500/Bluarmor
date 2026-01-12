@@ -35,9 +35,9 @@ const Footer = () => {
 
   const footerLinks = {
     product: [
-      { label: 'BLU3 E', href: '#products' },
-      { label: 'BLU5 Pro', href: '#products' },
-      { label: 'BLU7 Ultra', href: '#products' },
+      { label: 'HS1 Headset', href: '#products' },
+      { label: 'C20 Mesh', href: '#products' },
+      { label: 'C50 Series', href: '#products' },
       { label: 'Accessories', href: '#' },
     ],
     company: [
