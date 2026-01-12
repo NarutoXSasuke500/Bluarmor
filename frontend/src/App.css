@@ -32,3 +32,17 @@
         transform: rotate(360deg);
     }
 }
+
+/* Reset and remove default centering */
+.App {
+    text-align: left;
+}
+
+/* Hide scrollbar for timeline */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
