@@ -91,7 +91,7 @@ const Header = () => {
                 </Link>
               ))}
               <Link
-                to="/#products"
+                to="/products"
                 className="btn-primary w-full mt-4 text-sm"
               >
                 Explore the 2026 Armoury
