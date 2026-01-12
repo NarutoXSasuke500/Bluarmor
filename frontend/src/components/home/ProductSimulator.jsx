@@ -82,10 +82,10 @@ const ProductSimulator = () => {
                   {selectedProduct.name} — {selectedProduct.price}
                 </h4>
               </div>
-              <button className="btn-primary">
-                Configure & Order
+              <Link to={`/products/${selectedProduct.id}`} className="btn-primary">
+                View Details
                 <ChevronRight className="w-5 h-5" />
-              </button>
+              </Link>
             </div>
           </div>
         )}
