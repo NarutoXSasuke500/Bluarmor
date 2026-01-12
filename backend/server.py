@@ -202,71 +202,95 @@ async def get_newsletter_subscriptions():
 async def seed_database():
     """Seed the database with initial data"""
     
-    # Check if already seeded
-    existing_products = await db.products.count_documents({})
-    if existing_products > 0:
-        return {"message": "Database already seeded"}
+    # Clear existing products for reseed
+    await db.products.delete_many({})
     
-    # Seed products
+    # Seed products with correct BluArmor product names
     products = [
         {
-            "id": "blu3-e",
-            "name": "BLU3 E",
-            "tagline": "Entry-level excellence",
-            "price": "₹12,999",
-            "features": ["Mesh Network", "Voice Commands", "12hr Battery"],
+            "id": "hs1",
+            "name": "BluArmor HS1",
+            "tagline": "Solo Commuters & Daily Riders",
+            "price": "₹2,999",
+            "features": ["Dhwani Audio", "Bluetooth 5.3", "20H Battery", "Voice Assistant Ready"],
             "created_at": datetime.utcnow()
         },
         {
-            "id": "blu5-pro",
-            "name": "BLU5 Pro",
-            "tagline": "Professional grade",
+            "id": "c20",
+            "name": "BluArmor C20",
+            "tagline": "Urban Explorers & Entry-Level Groups",
+            "price": "₹9,999",
+            "features": ["RideGrid Lite Mesh", "Pulse by BLU Audio", "Music Sharing", "16+ Hour Battery"],
+            "created_at": datetime.utcnow()
+        },
+        {
+            "id": "c30",
+            "name": "BluArmor C30",
+            "tagline": "Endurance Riders & Pillion Duos",
+            "price": "₹10,999",
+            "features": ["Hybrid Mesh + Bluetooth", "Charge-on-the-Go", "5-Button Interface", "Universal Pairing"],
+            "created_at": datetime.utcnow()
+        },
+        {
+            "id": "c50",
+            "name": "BluArmor C50",
+            "tagline": "Group Riders & Mesh Network Users",
+            "price": "₹15,999",
+            "features": ["RideGrid 2.0 Mesh", "20 Rider Connectivity", "Tuned by BLU Audio", "IP67 Waterproof"],
+            "created_at": datetime.utcnow()
+        },
+        {
+            "id": "c50plus",
+            "name": "BluArmor C50Plus",
+            "tagline": "Serious Tourers & Performance Riders",
             "price": "₹18,999",
-            "features": ["6-Device Connect", "HD Audio", "OTA Updates"],
+            "features": ["RideGrid 2.0", "Wireless T-Stick Remote", "ClickDock Mount", "16+ Hour Battery"],
             "created_at": datetime.utcnow()
         },
         {
-            "id": "blu7-ultra",
-            "name": "BLU7 Ultra",
-            "tagline": "Ultimate performance",
+            "id": "c50pro",
+            "name": "BluArmor C50Pro",
+            "tagline": "Ride Captains & Tech Enthusiasts",
             "price": "₹24,999",
-            "features": ["Full eRideGrid", "Premium Audio", "All Features"],
+            "features": ["RideAura Safety Lighting", "Wireless T-Stick", "MagDock Mount", "Crash Detection SOS"],
             "created_at": datetime.utcnow()
         }
     ]
     await db.products.insert_many(products)
     
-    # Seed FAQ items
-    faq_items = [
-        {
-            "id": str(uuid.uuid4()),
-            "question": "How do I update my device firmware?",
-            "answer": "Open the Bluarmor app, connect your device, and navigate to Settings > Firmware. Updates are automatic when available.",
-            "order": 1
-        },
-        {
-            "id": str(uuid.uuid4()),
-            "question": "What is the warranty period?",
-            "answer": "All Bluarmor devices come with a 2-year comprehensive warranty covering manufacturing defects and component failures.",
-            "order": 2
-        },
-        {
-            "id": str(uuid.uuid4()),
-            "question": "How many devices can connect in a mesh?",
-            "answer": "The eRideGrid mesh network supports unlimited riders. Each node strengthens the network.",
-            "order": 3
-        },
-        {
-            "id": str(uuid.uuid4()),
-            "question": "Is the system waterproof?",
-            "answer": "All devices are rated IP67 — fully protected against dust and water immersion up to 1 meter for 30 minutes.",
-            "order": 4
-        }
-    ]
-    await db.faq_items.insert_many(faq_items)
+    # Seed FAQ items if not exists
+    existing_faq = await db.faq_items.count_documents({})
+    if existing_faq == 0:
+        faq_items = [
+            {
+                "id": str(uuid.uuid4()),
+                "question": "How do I update my device firmware?",
+                "answer": "Open the Bluarmor 360° App, connect your device, and navigate to Settings > Firmware. Updates are automatic when available via OTA.",
+                "order": 1
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "What is the warranty period?",
+                "answer": "All BluArmor devices come with a 2-year comprehensive warranty covering manufacturing defects and component failures.",
+                "order": 2
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "How many devices can connect in a mesh?",
+                "answer": "RideGrid 2.0 mesh network supports up to 20 riders with self-healing connections. eRideGrid cloud extends this to unlimited range.",
+                "order": 3
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "Is the system waterproof?",
+                "answer": "All devices are rated IP67 — fully protected against dust and water immersion up to 1 meter for 30 minutes. Monsoon ready.",
+                "order": 4
+            }
+        ]
+        await db.faq_items.insert_many(faq_items)
     
-    logger.info("Database seeded successfully")
-    return {"message": "Database seeded successfully", "products": len(products), "faq_items": len(faq_items)}
+    logger.info("Database seeded successfully with BluArmor products")
+    return {"message": "Database seeded successfully", "products": len(products)}
 
 # Include the router in the main app
 app.include_router(api_router)
