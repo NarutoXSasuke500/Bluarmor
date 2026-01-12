@@ -103,8 +103,7 @@ const ProductsPage = () => {
                     <div className="p-6">
                       {/* Category Tag */}
                       <span className="inline-block text-[10px] font-medium tracking-wider uppercase text-[#2563eb] mb-2">
-                        {getCategory(product) === 'headset' ? 'Helmet Headset' : 
-                         getCategory(product) === 'premium' ? 'Premium Intercom' : 'Mesh Intercom'}
+                        {getCategoryLabel(product.category)}
                       </span>
 
                       {/* Product Name */}
