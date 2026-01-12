@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Check, ChevronRight, ChevronLeft, Package, Zap, Shield, Wifi, Battery, Mic, Loader2 } from 'lucide-react';
-import { getProducts } from '../services/api';
 import { productDetails } from '../data/productDetails';
 import '../styles/bluarmor.css';
 
@@ -14,26 +13,12 @@ const ProductDetailPage = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const products = await getProducts();
-        const found = products.find(p => p.id === productId);
-        if (found) {
-          // Merge with detailed product info
-          const details = productDetails[productId] || {};
-          setProduct({ ...found, ...details });
-        }
-      } catch (error) {
-        console.log('Error fetching product');
-        const details = productDetails[productId];
-        if (details) {
-          setProduct(details);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProduct();
+    // Get product from local data
+    const productData = productDetails[productId];
+    if (productData) {
+      setProduct(productData);
+    }
+    setLoading(false);
   }, [productId]);
 
   const tabs = [
