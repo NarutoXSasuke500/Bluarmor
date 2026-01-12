@@ -1,32 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Check, ChevronRight, Loader2 } from 'lucide-react';
-import { getProducts } from '../../services/api';
-import { products as mockProducts } from '../../data/mock';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Check, ChevronRight } from 'lucide-react';
+import { products } from '../../data/productDetails';
 
 const ProductSimulator = () => {
-  const [products, setProducts] = useState(mockProducts);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts();
-        if (data && data.length > 0) {
-          setProducts(data);
-          setSelectedProduct(data[1] || data[0]);
-        } else {
-          setSelectedProduct(mockProducts[1]);
-        }
-      } catch (error) {
-        console.log('Using mock products');
-        setSelectedProduct(mockProducts[1]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
-  }, []);
+  // Show 6 featured products on homepage
+  const featuredProducts = products.filter(p => 
+    ['hs1', 'c20', 'c30', 'c50', 'c50plus', 'c50pro'].includes(p.id)
+  );
+  const [selectedProduct, setSelectedProduct] = useState(featuredProducts[2]);
 
   if (loading) {
     return (
