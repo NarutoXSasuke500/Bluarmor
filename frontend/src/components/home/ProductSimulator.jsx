@@ -49,13 +49,13 @@ const ProductSimulator = () => {
           </h2>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Product Grid - 6 products in 2 rows */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <button
               key={product.id}
               onClick={() => setSelectedProduct(product)}
-              className={`text-left p-8 border transition-all duration-150 ${
+              className={`text-left p-6 border transition-all duration-150 ${
                 selectedProduct?.id === product.id
                   ? 'bg-[#1a1a1e] border-[#2563eb]'
                   : 'bg-[#0a0a0b] border-[#27272a] hover:border-[#3f3f46]'
@@ -63,29 +63,29 @@ const ProductSimulator = () => {
             >
               {/* Product Badge */}
               {selectedProduct?.id === product.id && (
-                <span className="inline-block text-xs font-medium tracking-wider uppercase text-[#2563eb] mb-4">
+                <span className="inline-block text-xs font-medium tracking-wider uppercase text-[#2563eb] mb-3">
                   Selected
                 </span>
               )}
 
               {/* Product Name */}
-              <h3 className="heading-subsection text-[#f5f5f7] mb-1">
+              <h3 className="text-lg font-semibold text-[#f5f5f7] mb-1">
                 {product.name}
               </h3>
-              <p className="text-sm text-[#71717a] mb-4">
+              <p className="text-xs text-[#71717a] mb-3">
                 {product.tagline}
               </p>
 
               {/* Price */}
-              <p className="text-2xl font-bold text-[#f5f5f7] mb-6">
+              <p className="text-xl font-bold text-[#f5f5f7] mb-4">
                 {product.price}
               </p>
 
               {/* Features */}
-              <ul className="space-y-2">
-                {product.features.map((feature, index) => (
-                  <li key={index} className="flex items-center gap-2 text-sm text-[#a1a1aa]">
-                    <Check className="w-4 h-4 text-[#2563eb]" />
+              <ul className="space-y-1.5">
+                {product.features.slice(0, 4).map((feature, index) => (
+                  <li key={index} className="flex items-center gap-2 text-xs text-[#a1a1aa]">
+                    <Check className="w-3.5 h-3.5 text-[#2563eb] flex-shrink-0" />
                     {feature}
                   </li>
                 ))}
