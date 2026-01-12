@@ -55,7 +55,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link
-              to="/#products"
+              to="/products"
               className="btn-primary text-sm px-6 py-3"
             >
               Explore the 2026 Armoury
